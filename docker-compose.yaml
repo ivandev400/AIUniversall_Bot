@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  php-fpm:
+    build: ./.docker/php-fpm
+    volumes:
+      - ./src:/var/www/html
+  mysql:
+    container_name: mysql
+    image: mysql
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=G10dd
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin
+    ports:
+      - 1500:80
+    environment:
+      - PMA_HOST=mysql
